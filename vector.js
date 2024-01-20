@@ -83,6 +83,44 @@ function rotate(v, u, th) {
   };
 }
 
+// Frame rotation matrix in x axis
+// Fa ---> x, theta ---> Fb
+// returns Aa2b
+function rot1mat(theta){
+  const c = Math.cos(theta);
+  const s = Math.sin(theta);
+  return [
+    [1,0,0],
+    [0,c,s],
+    [0,-s,c],
+  ]
+}
+
+// Frame rotation matrix in y axis
+// Fa ---> y, theta ---> Fb
+// returns Aa2b
+function rot2mat(theta){
+  const c = Math.cos(theta);
+  const s = Math.sin(theta);
+  return [
+    [c,0,-s],
+    [0,1,0],
+    [s,0,c],
+  ]
+}
+
+// Frame rotation matrix in z axis
+// Fa ---> z, theta ---> Fb
+// returns Aa2b
+function rot3mat(theta){
+  const c = Math.cos(theta);
+  const s = Math.sin(theta);
+  return [
+    [c,s,0],
+    [-s,c,0],
+    [0,0,1],
+  ]
+}
 // quaternion and kinematics:
 function quat(qx, qy, qz, qs) {
   return {
@@ -191,6 +229,9 @@ module.exports = {
   getOnPlane,
   getNormalToVec,
   rotate,
+  rot1mat,
+  rot2mat,
+  rot3mat,
   quat,
   qtn2A,
   MxM,
