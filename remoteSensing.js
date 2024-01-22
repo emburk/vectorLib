@@ -130,7 +130,7 @@ return {
  * @param {Object} lla 
  * @param {number} lla.lat - Geodetic latitude in degrees
  * @param {number} lla.lng - Longitude in degrees
- * @param {number} lla.alt - Altitude above reference ellipsoid in km
+ * @param {number} lla.alt - Altitude above reference ellipsoid in m
  * @returns {Vector} Cartesian coordinates
  */
 // lla2ecef -convert Lat Lng Alt to ECEF x, y, z coordinates
@@ -139,7 +139,7 @@ lla2ecef: function(lla){
   const rad = 180.0/Math.PI;
   const latgd = lla.lat / rad;
   const lon = lla.lng / rad;
-  const alt = lla.alt; // in km
+  const alt = lla.alt / 1000.0; // m -> km
 
 
   const a = 6378.1363;
