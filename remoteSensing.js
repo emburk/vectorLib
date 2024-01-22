@@ -75,8 +75,6 @@ getHaversineDistance: function(lat1,lon1,lat2,lon2){
         slat* slat + Math.cos(lat1)*Math.cos(lat2)*slon*slon));
 },
 
-
-
 // ecef2lla  - convert earth-centered earth-fixed (ECEF)
 //             in cartesian coordinates (km)
 //             to geodetic lat (deg), lon (deg) and altitude (m)
@@ -125,7 +123,35 @@ return {
   lng: lon*180/Math.PI, // in degrees
   alt: alt // in meters
 }
+},
+
+/**
+ * 
+ * @param {Object} lla 
+ * @param {number} lla.lat - Geodetic latitude in degrees
+ * @param {number} lla.lng - Longitude in degrees
+ * @param {number} lla.alt - Altitude above reference ellipsoid in km
+ * @returns {Vector} Cartesian coordinates
+ */
+// lla2ecef -convert Lat Lng Alt to ECEF x, y, z coordinates
+lla2ecef: function(lla){
+  
+  const rad = 180.0/Math.PI;
+  const latgd = lla.lat / rad;
+  const lon = lla.lng / rad;
+  const alt = lla.alt; // in km
+
+
+  const a = 6378.1363;
+  const e = 0.08181919084262149;
+  
+  // intermediate calculation
+  // prime vertical radius of curvature
+  const N = a / Math.sqrt(1 - e*e*Math.sin(latgd)**2)
+
+  return v.vec(
+    (N + alt) * Math.cos(latgd) * Math.cos(lon),
+    (N + alt) * Math.cos(latgd) * Math.sin(lon),
+    (N * (1-e*e) + alt) * Math.sin(latgd));
 }
-
-
 }

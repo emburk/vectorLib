@@ -355,7 +355,7 @@ function MxM(M1, M2) {
  * Mxv(M, v)
  * @param {Matrix3x3} M - M matrix
  * @param {Vector} v - v vector
- * @returns {Matrix3x3} M x v
+ * @returns {Vector} M x v
  */
 function Mxv(M, v) {
   return {
@@ -425,6 +425,17 @@ function eye() {
   ];
 }
 
+/**
+ * Returns angle between two vectors in radians in 0-pi
+ * Inputs must not have to be unit vector
+ * @param {Vector} v1 - first vector
+ * @param {Vector} v2 - second vector
+ * @returns {number} angle in radians
+ */
+function getAngle(v1, v2) {
+  return Math.acos(dot(getUnit(v1), getUnit(v2)));
+}
+
 module.exports = {
   vec,
   getAngleABabAC,
@@ -449,5 +460,6 @@ module.exports = {
   Mxs,
   MT,
   Mbyv,
-  eye
+  eye,
+  getAngle
 }
