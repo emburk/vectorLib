@@ -52,6 +52,20 @@ function getAngleABabAC(a, b, AC) {
   return Math.acos((a * a + b * b - c * c) / a / b / 2);
 }
 
+/**
+ * Calculates length in a triangle 
+ *
+ * @param {number} a - length of the edge a
+ * @param {number} b - length of the edge b
+ * @param {number} AC - angle between the edges a and c in radians
+ * @returns {number} length of the edge c
+ */
+function getLencabAC(a, b, AC) {
+  const bb = -2 * a * Math.cos(AC);
+  const sdelta = Math.sqrt(bb * bb - 4 * (a * a - b * b));
+  let c = (-bb - sdelta) / 2;
+  return c
+}
 
 /**
  * Calculates specific angle in a triangle 
@@ -439,6 +453,7 @@ function getAngle(v1, v2) {
 module.exports = {
   vec,
   getAngleABabAC,
+  getLencabAC,
   getAngleACabAB,
   getNorm,
   getUnit,
