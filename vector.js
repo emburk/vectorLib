@@ -35,6 +35,17 @@ function vec(x, y, z) {
   return { x: x, y: y, z: z };
 }
 
+
+/**
+ * Copies 3 dimensional vector object
+ *
+ * @param {Vector} input vectır
+ * @returns {Vector} new vec object with fields x, y and z
+ */
+function copy(v) {
+  return { x: v.x, y: v.y, z: v.z };
+}
+
 /**
  * Calculates specific angle in a triangle 
  *
@@ -452,6 +463,7 @@ function getAngle(v1, v2) {
 
 module.exports = {
   vec,
+  copy,
   getAngleABabAC,
   getLencabAC,
   getAngleACabAB,
